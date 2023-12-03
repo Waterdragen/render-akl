@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "@types/html": "^1.0.4"
+  }
+}

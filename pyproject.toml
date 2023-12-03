@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "render-akl"
+version = "0.1.0"
+description = ""
+authors = ["Waterdragen <you@example.com>"]
+license = "GPL-3.0-only"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+django = "^4.2.7"
+django-admin = "^2.0.2"
+daphne = "^4.0.0"
+humanize = "^4.9.0"
+jellyfish = "^1.0.3"
+requests = "^2.31.0"
+channels = "^4.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

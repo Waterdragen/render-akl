@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "cmini"
+version = "0.1.0"
+description = ""
+authors = ["Apsu <apsu@propter.net>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+discord = "^2.2.2"
+more-itertools = "^9.1.0"
+jellyfish = "^0.9.0"
+humanize = "^4.6.0"
+requests = "^2.28.2"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

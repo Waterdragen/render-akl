@@ -1,0 +1,2 @@
+
+waterdragen: add -angle/ -nonangle and -mirror to the view command to manipulate the layout
