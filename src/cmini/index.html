@@ -1,0 +1,68 @@
+<!-- Cmini -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keyboard Layout Wiki</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="cmini.css">
+  <script src="../dist/main.js" type="application/javascript"></script>
+  <script src="../dist/cmini.js" type="module"></script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <nav>
+      <ul>
+          <li>
+              <a class="header-button"
+                  onclick="location.href='../'">
+                  Home</a>
+          </li>
+          <li>
+              <a class="header-button"
+                  onclick="location.href='../links'">
+                  Links</a>
+          </li>
+          <li>
+              <a class="header-button active"
+                  onclick="location.href='./'">
+                  cmini</a>
+          </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    
+    <section>
+      <h1>cmini</h1>
+      <div>A layout analyzer in bot form</div>
+      <button class="github-button"
+              onclick="window.open('https://github.com/apsu/cmini')">
+              Github</button>
+    </section>
+
+    <section>
+      <h1>test</h1>
+      <div id="cminiPromptWrapper">
+        <div class="prompt-section">
+          <textarea id="cminiPromptWindow" readonly></textarea>
+        </div>
+
+        <div class="prompt-section">
+          <input type="text" 
+                 id="cminiCommandInput" 
+                 placeholder="Message @cmini">
+          <button id="cminiSendButton"></button>
+        </div>
+
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>

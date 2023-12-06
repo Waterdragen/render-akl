@@ -1,7 +1,4 @@
 const SITE_URL: string = "http://localhost:5050/";
+const CMINI_URL: string = "ws://localhost:8000/cmini/";
 
-function getUrl(folder: string = ""): string {
-    return SITE_URL + folder;
-}
-
-export {SITE_URL, getUrl};
+export {SITE_URL, CMINI_URL};

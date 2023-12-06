@@ -7,7 +7,7 @@ license = "GPL-3.0-only"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "3.11"
 django = "4.2.7"
 django-admin = "2.0.2"
 daphne = "4.0.0"
