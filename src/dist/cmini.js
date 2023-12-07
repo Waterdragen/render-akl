@@ -4,7 +4,7 @@ import { CMINI_URL } from "./consts.js";
 var CminiSocket = new WebSocket(CMINI_URL);
 var cminiConnectionTimeout = setCminiConnectionTimeout();
 function setCminiConnectionTimeout() {
-    return setTimeout(onCminiConnectionTimeout, 5000);
+    return setTimeout(onCminiConnectionTimeout, 10000);
 }
 function onCminiConnectionTimeout() {
     if (!isCminiConnected()) {
