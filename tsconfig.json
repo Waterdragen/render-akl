@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es2016",
     "module": "es2015",
-    "rootDir": "./src/",
+    "rootDir": "./src/ts/",
     "outDir": "./src/dist/",
     "removeComments": true,
     "noEmitOnError": true,
