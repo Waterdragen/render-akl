@@ -1,3 +1,3 @@
-const SITE_URL = "http://localhost:5050/";
-const CMINI_URL = "ws://localhost:8000/cmini/";
+const SITE_URL = "https://waterdragen.onrender.com";
+const CMINI_URL = "wss://cmini.onrender.com";
 export { SITE_URL, CMINI_URL };
