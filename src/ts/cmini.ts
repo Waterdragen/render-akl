@@ -7,7 +7,7 @@ var CminiSocket: WebSocket = new WebSocket(CMINI_URL);
 var cminiConnectionTimeout: NodeJS.Timeout = setCminiConnectionTimeout();
 
 function setCminiConnectionTimeout(): NodeJS.Timeout {
-    return setTimeout(onCminiConnectionTimeout, 5000);
+    return setTimeout(onCminiConnectionTimeout, 10_000);
 }
 
 function onCminiConnectionTimeout() {
