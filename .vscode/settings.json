@@ -1,3 +1,4 @@
 {
-    "liveServer.settings.port": 5050
+    "liveServer.settings.port": 5050,
+	"explorer.sortOrder": "type"
 }
