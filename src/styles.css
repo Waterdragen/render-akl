@@ -79,3 +79,20 @@ footer {
     padding: 20px;
     color: #fff;
 }
+
+/* Scroll bar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #555;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ddd;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #fff;
+}

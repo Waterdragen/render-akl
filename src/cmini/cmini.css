@@ -1,5 +1,5 @@
 @font-face {
-    font-family: 'gg sans Normal';
+    font-family: 'gg sans';
     src: url('../font/ggsans-Normal.woff2');
     font-weight: normal;
     font-style: normal;
@@ -21,26 +21,28 @@
 }
 
 #cminiPromptWindow {
-    background-color: #2b2d31;
-    color: #fff;
+    background-color: #313338;
+    color: #ddd;
     width: 100%;
     height: 50vh;
     resize: none;
+    overflow: auto;
     border-radius: min(1vw, 10px);
     border-color: #aaa;
     box-sizing: border-box;
+    padding: 5px 0;
 }
 
 #cminiCommandInput {
     background-color: #383a40;
-    color: #fff;
+    color: #eee;
     padding: 10px;
     width: 100%;
     resize: none;
     border: 1px solid #aaa;
     border-radius: min(0.5vw, 5px);
     font-size: medium;
-    font-family: "gg sans Normal";
+    font-family: "gg sans";
     box-sizing: border-box;
 }
 
