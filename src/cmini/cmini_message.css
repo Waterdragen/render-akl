@@ -1,0 +1,65 @@
+@font-face {
+    font-family: 'gg sans';
+    src: url('../font/ggsans-Normal.woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+.discord-message {
+    display: table;
+    font-family: "gg sans";
+    font-size: 16px;
+    font-weight: normal;
+    white-space: pre-line;
+    width: 100%;
+}
+
+.discord-message tr {
+    vertical-align: top;
+    text-align: left;
+}
+
+td {
+    display: inline-table;
+    padding-left: 10px;
+}
+
+.discord-message tr code {
+    display: inline-block;
+    font-family: Consolas, monospace;
+    font-size: 14px;
+    font-weight: normal;
+    background-color: #2b2d31;
+    padding: 10px;
+    border: 1px solid #1e1f22;
+    border-radius: 4px;
+}
+
+.cmini-title {
+    display: table;
+    vertical-align: bottom;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.cmini-discord-message {
+    border-left: 2px solid #faa61a;
+    background-color: #46423c;
+}
+
+.cmini-bot {
+    background-color: #5865f2;
+    color: #fff;
+    padding: 2px 4px;
+    font-family: Consolas, monospace;
+    font-size: 10px;
+    border-radius: 4px;
+    margin-left: 4px;
+}
+
+.message-date {
+    margin-left: 4px;
+    color: #ccc;
+    font-size: 10px;
+}
