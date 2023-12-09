@@ -23,20 +23,37 @@
 td {
     display: inline-table;
     padding-left: 10px;
+    height: 100%;
 }
 
-.discord-message tr code {
-    display: inline-block;
+.content-column {
+    width: 70%;
+}
+
+.code-block {
+    display: block;
     font-family: Consolas, monospace;
     font-size: 14px;
     font-weight: normal;
     background-color: #2b2d31;
-    padding: 10px;
+    margin: 4px 0;
+    padding: 0.5em;
+    width: 100%;
     border: 1px solid #1e1f22;
     border-radius: 4px;
 }
 
-.cmini-title {
+.code-word {
+    display: inline-block;
+    font-family: Consolas, monospace;
+    font-size: 14px;
+    background-color: #2b2d31;
+    margin: 0 4px;
+    padding: 2px 1px;
+    border-radius: 4px;
+}
+
+.message-title {
     display: table;
     vertical-align: bottom;
     margin-bottom: 5px;
@@ -60,6 +77,6 @@ td {
 
 .message-date {
     margin-left: 4px;
-    color: #ccc;
-    font-size: 10px;
+    color: #aaa;
+    font-size: 11px;
 }

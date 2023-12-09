@@ -56,33 +56,18 @@ sendButton?.addEventListener("click", () => {
     }
         
     const command: string = commandInput.value;
+    // Send the user input to the websocket
     CminiSocket.send(command);
+
+    // Append the command to the window
+    if (commandWindow !== null) {
+        commandWindow.innerHTML += getUserMessageHTML(command);
+    }
 });
 
 function sendMessage(message: string) {
-    let messageHTML = convertHTML(message);
-    messageHTML = getCminiMessageHTML(messageHTML);
     if (commandWindow !== null) {
-        commandWindow.innerHTML += messageHTML;
+        commandWindow.innerHTML += getCminiMessageHTML(message);
     }
-}
-
-function convertHTML(message: string): string {
-    let s = message.replace("&", "&amp")
-                   .replace("<", "&lt")
-                   .replace(">", "&gt")
-                   .replace(/(?:\r\n|\r|\n)/g, "<br>");
-
-    let codeBlocks = s.split("```");
-    if (codeBlocks.length > 1) {
-        for (let i = 1; i < codeBlocks.length; i+=2) {
-            // Remove first and last line breaks inside the code block
-            codeBlocks[i] = codeBlocks[i].replace(/^<br>|<br>$/g, "");
-            codeBlocks[i] = `<code class="code-block">${codeBlocks[i]}</code>`;
-        }
-    }
-    s = codeBlocks.join("");
-
-    return "<div>" + s + "</div>";
 }
 
