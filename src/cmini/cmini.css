@@ -32,6 +32,22 @@
     box-sizing: border-box;
     padding: 5px 0;
 }
+/* Scroll bar */
+#cminiPromptWindow::-webkit-scrollbar {
+    width: 10px;
+}
+#cminiPromptWindow::-webkit-scrollbar-track {
+    background: #2b2d31;
+}
+
+#cminiPromptWindow::-webkit-scrollbar-thumb {
+    background: #1a1b1e;
+    border-radius: 5px;
+}
+
+#cminiPromptWindow::-webkit-scrollbar-thumb:hover {
+    background: #1a1b1e;
+}
 
 #cminiCommandInput {
     background-color: #383a40;
