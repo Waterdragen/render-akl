@@ -5,7 +5,7 @@ const commandWindow = document.getElementById("cminiPromptWindow");
 import { CMINI_URL } from "./consts.js";
 import { getUserMessageHTML, getCminiMessageHTML } from "./cmini_message.js";
 
-var CminiSocket: WebSocket = new WebSocket(CMINI_URL);
+var CMINI_SOCKET: WebSocket = new WebSocket(CMINI_URL);
 var cminiConnectionTimeout: NodeJS.Timeout = setCminiConnectionTimeout();
 
 function setCminiConnectionTimeout(): NodeJS.Timeout {
@@ -16,30 +16,30 @@ function onCminiConnectionTimeout() {
     if (!isCminiConnected()) {
         // Connection timeout occurred
         console.log('WebSocket connection timed out!');
-        CminiSocket.close(); // Close the connection
+        CMINI_SOCKET.close(); // Close the connection
     }
 }
 
 function cminiReconnect() {
     console.log("Reconnecting to cmini");
-    CminiSocket = new WebSocket(CMINI_URL);
+    CMINI_SOCKET = new WebSocket(CMINI_URL);
     cminiConnectionTimeout = setCminiConnectionTimeout();
     setupCminiEventListeners();
 }
 
 function isCminiConnected(): boolean {
-    return CminiSocket.readyState === WebSocket.OPEN;
+    return CMINI_SOCKET.readyState === WebSocket.OPEN;
 }
 
 function setupCminiEventListeners() {
     // Event listener for when the connection is established
-    CminiSocket.onopen = (event) => {
+    CMINI_SOCKET.onopen = (event) => {
         console.log('cmini connection established!');
         clearTimeout(cminiConnectionTimeout);
     };
     
     
-    CminiSocket.onmessage = (event) => {
+    CMINI_SOCKET.onmessage = (event) => {
         const message: string = event.data;
         sendMessage(message);
         console.log("Received message: " + message);
@@ -57,7 +57,7 @@ sendButton?.addEventListener("click", () => {
         
     const command: string = commandInput.value;
     // Send the user input to the websocket
-    CminiSocket.send(command);
+    CMINI_SOCKET.send(command);
 
     // Append the command to the window
     if (commandWindow !== null) {
