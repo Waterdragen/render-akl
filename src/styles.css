@@ -39,6 +39,7 @@ nav ul {
 }
 
 nav ul li {
+    cursor: pointer;
     display: inline;
     margin-right: 20px;
 }
@@ -73,11 +74,44 @@ button {
     color: #e2b714;
 }
 
+.remarks {
+    color: #ccc;
+}
+
+.remarks-title {
+    color: #ccc;
+    font-size: x-large;
+}
+
+.remarks code {
+    background-color: #444;
+    padding: 2px 3px;
+    color: #eee;
+    font-size: 15px;
+    border: 1px solid #777;
+    border-radius: 3px;
+}
+
+.remarks-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    height: fit-content;
+}
+
+.remarks-item {
+    padding: 2px 0;
+}
+
+.remarks-list li {
+    padding: 2px 0;
+}
+
 /* Footer */
-footer {
-    background-color: #333;
-    padding: 20px;
-    color: #fff;
+.last-line {
+    background-color: inherit;
+    height: 20px;
+    bottom: 0;
+    width: 100%;
 }
 
 /* Default Scroll bar */

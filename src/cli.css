@@ -1,0 +1,56 @@
+.cli-section {
+    padding: 10px;
+    background-color: #2d0922;
+    min-width: 960px;
+    width: min(80vw, 960px);
+    min-height: 540px;
+    height: min(30vw, 720px);
+    color: #d2d2d2;
+    border-radius: 5px;
+    overflow-wrap: break-word;
+    overflow-y: auto;
+    font-size: medium;
+    font-family: "Ubuntu Mono", monospace;
+}
+
+.cli-output {
+    border: none;
+    height: fit-content;
+}
+
+.cli-input-wrapper {
+    display: table;
+}
+
+.cli-input {
+    display: inline;
+    background-color: none;
+    width: 100%;
+    height: fit-content;
+    border: none;
+    outline: none;
+}
+
+.cli-input:focus {
+    outline: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    display: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    display: none;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    display: none;
+}
