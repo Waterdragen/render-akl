@@ -6,7 +6,7 @@ import { getUserMessageHTML, getCminiMessageHTML } from "./cmini_message.js";
 var CMINI_SOCKET = new WebSocket(CMINI_URL);
 var cminiConnectionTimeout = setCminiConnectionTimeout();
 function setCminiConnectionTimeout() {
-    return setTimeout(onCminiConnectionTimeout, 10000);
+    return setTimeout(onCminiConnectionTimeout, 10_000);
 }
 function onCminiConnectionTimeout() {
     if (!isCminiConnected()) {
@@ -35,7 +35,7 @@ function setupCminiEventListeners() {
     };
 }
 setupCminiEventListeners();
-sendButton === null || sendButton === void 0 ? void 0 : sendButton.addEventListener("click", () => {
+sendButton?.addEventListener("click", () => {
     if (!isCminiConnected()) {
         cminiReconnect();
         return;

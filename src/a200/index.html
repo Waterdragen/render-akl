@@ -1,0 +1,129 @@
+<!-- A200 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keyboard Layout Wiki</title>
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu+Mono" />
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../cli.css">
+  <script src="../dist/main.js" type="application/javascript"></script>
+  <script src="../dist/a200.js", type="module"></script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <nav>
+      <ul>
+        <li>
+          <a class="header-button"
+              onclick="location.href='../'">
+              Home</a>
+        </li>
+        <li>
+          <a class="header-button"
+              onclick="location.href='../links'">
+              Links</a>
+        </li>
+        <li>
+          <a class="header-button"
+              onclick="location.href='../cmini'">
+              cmini</a>
+        </li>
+        <li>
+          <a class="header-button active"
+              onclick="location.href='./'">
+              a200</a>
+        </li>
+        <li>
+          <a class="header-button"
+              onclick="location.href='../oxeylyzer'">
+              oxeylyzer</a>
+        </li>
+        <li>
+          <a class="header-button"
+              onclick="location.href='../genkey'">
+              genkey</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h1>a200</h1>
+      <div>A simple, spreadsheet-like layout analyzer</div>
+      <button class="github-button"
+              onclick="window.open('https://github.com/clemenpine/a200')">
+              Github</button>
+    </section>
+
+    <section>
+      <h1>demo</h1>
+      <div class="cli-wrapper">
+        <div class="cli-section">
+          <div type="text" class="cli-output"></div>
+          <div class="cli-input-wrapper">
+            <span style="color: #8adf32">guest@linux&#8209;desktop</span>
+            <span>:</span>
+            <span style="color: #729fcf">/root/app/a200&#8209;master/$&nbsp;</span>
+            <div type="text" class="cli-input" contenteditable="true"></div>
+          </div>
+
+          <br>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <h2 class="remarks-title">How to run</h2>
+      <div class="remarks">
+        <ul class="remarks-list">
+          <li>
+            Run a200 directly: <code>python ./src/main.py [args]</code>
+          </li>
+          <li>
+            Linux/MacOS:
+            <ul style="padding-left: 20px;">
+              <li>
+                1. <code>chmod +x ./a200</code>
+              </li>
+              <li>
+                2. <code>./a200 [args]</code>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Windows:
+            <ul style="padding-left: 20px;">
+              <li>
+                1. <code>copy a200 a200.bat</code>
+              </li>
+              <li>
+                2. <code>a200 [args]</code>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="remarks-title">Remarks</h2>
+      <div class="remarks">
+        <ul class="remarks-list">
+          <li>
+            Disabled commands: <code>config</code>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+  <div class="last-line"></div>
+</body>
+
+</html>

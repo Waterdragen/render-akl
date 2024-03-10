@@ -1,0 +1,128 @@
+<!-- Genkey -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keyboard Layout Wiki</title>
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu+Mono" />
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../cli.css">
+  <link rel="stylesheet" href="./genkey.css">
+  <script src="../dist/main.js" type="application/javascript"></script>
+  <script src="../dist/genkey.js", type="module"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+      <nav>
+        <ul>
+          <li>
+            <a class="header-button"
+                onclick="location.href='../'">
+                Home</a>
+          </li>
+          <li>
+            <a class="header-button"
+                onclick="location.href='../links'">
+                Links</a>
+          </li>
+          <li>
+            <a class="header-button"
+                onclick="location.href='../cmini'">
+                cmini</a>
+          </li>
+          <li>
+            <a class="header-button"
+                onclick="location.href='../a200'">
+                a200</a>
+          </li>
+          <li>
+            <a class="header-button"
+                onclick="location.href='../oxeylyzer'">
+                oxeylyzer</a>
+          </li>
+          <li>
+            <a class="header-button active"
+                onclick="location.href='./'">
+                genkey</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  
+    <main>
+      <section>
+        <h1>genkey</h1>
+        <div>The layout analyzer and generator used to create Semimak</div>
+        <button class="github-button"
+                onclick="window.open('https://github.com/semilin/genkey')">
+                Github</button>
+      </section>
+  
+      <section>
+        <h1>demo</h1>
+        <div class="cli-wrapper">
+          <div class="cli-section">
+            <div class="cli-output-wrapper">
+              <div type="text" class="cli-output"></div>
+              <div type="text" class="cli-interactive-input" contenteditable="true"></div>
+            </div>
+            <div class="cli-input-wrapper">
+              <span style="color: #8adf32">guest@linux&#8209;desktop</span>
+              <span>:</span>
+              <span style="color: #729fcf">/root/app/genkey&#8209;master/$&nbsp;</span>
+              <div type="text" class="cli-input" contenteditable="true"></div>
+            </div>
+
+            <br>
+          </div>
+  
+        </div>
+      </section>
+
+      <section>
+        <h2 class="remarks-title">How to run</h2>
+        <div class="remarks">
+          <div class="remarks-item">
+            Run genkey directly:&nbsp;<code>go run . [args]</code>
+          </div>
+          <div class="remarks-item">
+            Build genkey to binary:&nbsp;<code>go build</code>
+          </div>
+          <div class="remarks-item">
+            Run binary:&nbsp;
+            <code>./genkey [args]</code>
+            (Linux/MacOS)&nbsp;
+            <code>genkey [args]</code>
+            (Windows)&nbsp;
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="remarks-title">Remarks</h2>
+        <div class="remarks">
+          <ul class="remarks-list">
+            <li>
+              Disabled commands: <code>load</code>, <code>heatmap</code>
+            </li>
+            <li>
+              Disabled commands in interactive: <code>save</code>
+            </li>
+            <li>
+              <code>InitialPopulation</code> 1000&#8209;&gt;500
+            </li>
+            <li>
+              <code>Selection</code> 100&#8209;&gt;50
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+    <div class="last-line"></div>
+  </body>
+  
+</html>

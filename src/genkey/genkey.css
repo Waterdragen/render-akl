@@ -1,0 +1,19 @@
+.cli-output-wrapper {
+    display: table;
+    overflow-y: auto;
+    overflow-x: auto;
+    overflow-wrap: break-word;
+}
+
+.cli-output {
+    display: inline;
+}
+
+.cli-interactive-input {
+    display: none;
+    background-color: inherit;
+    width: 10%;
+    height: fit-content;
+    border: none;
+    outline: none;
+}
