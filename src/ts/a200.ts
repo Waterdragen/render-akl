@@ -1,17 +1,20 @@
 import { AnsiUp } from "../modules/ansi_up.js";
 import { A200_URL } from "./consts.js";
-import { BashCommandParser } from "./util.js";
+import { BashCommandParser, CliSectionTool, CliWebsocket } from "./util.js";
 const ansiUp = new AnsiUp;
 
 const cliSection = document.querySelector(".cli-section");
 const cliInput: HTMLInputElement | null = document.querySelector(".cli-input");
 const cliInputWrapper: HTMLElement | null = document.querySelector(".cli-input-wrapper");
 const cliOutput = document.querySelector(".cli-output");
+const cliSectionTool = new CliSectionTool(cliSection, window);
 
-let a200Ws = new WebSocket(A200_URL);
 let a200Command: string = "";
 
-a200Ws.onmessage = onResponse;
+let cliSectionBlurWrapper: HTMLElement | null = document.querySelector(".cli-section-blur-wrapper");
+let retryWrapper: HTMLElement | null = document.querySelector(".retry-wrapper");
+let retryButton: HTMLButtonElement | null = document.querySelector(".retry-button");
+let a200Ws = new CliWebsocket(A200_URL, onResponse, retryWrapper, cliSectionBlurWrapper, retryButton);
 
 const LINUX_HEADER = 
 `<span style="color: #8adf32">guest@linux-desktop</span>\
@@ -40,7 +43,7 @@ cliSection?.addEventListener("dblclick", function(event: Event) {
 });
 
 cliSection?.addEventListener("click", function(event: Event) {
-    weakFocusInput();
+    cliSectionTool.weakFocus(cliInput);
 })
 
 // User pressed enter
@@ -81,32 +84,19 @@ function onResponse(event: MessageEvent) {
 function sendCommand(command: string) {
     cliInputWrapper!.style.display = "none";
     cliInput?.setAttribute("contenteditable", "false");
-    if (a200Ws.readyState === WebSocket.OPEN) {
+    if (a200Ws.ready()) {
         a200Ws.send(command);
     }
-    focusInput();
-}
-
-function scrollToBottom() {
-    if (cliSection) {
-        cliSection.scrollTop = cliSection.scrollHeight;
+    else {
+        cliInputWrapper!.style.display = "flex";
+        cliInput?.setAttribute("contenteditable", "true");
     }
+    focusInput();
 }
 
 function focusInput() {
     setTimeout(() => {
         cliInput?.focus();
-    }, 0);
-}
-
-function weakFocusInput() {
-    if (window.getSelection()?.toString() !== "") {
-        return;
-    };
-    const currentScrollTop = cliSection?.scrollTop || document.body.scrollTop;
-    setTimeout(() => {
-        cliInput?.focus();
-        cliSection!.scrollTop = currentScrollTop;
     }, 0);
 }
 
@@ -120,7 +110,7 @@ function replaceOutput(output: string) {
     line.innerHTML = LINUX_HEADER + a200Command + "<br>" + output;
     cliOutput?.appendChild(line);
 
-    scrollToBottom();
+    cliSectionTool.scrollToBottom();
     focusInput();
 }
 
@@ -130,6 +120,6 @@ function appendOutput(output: string) {
     line.innerHTML = output;
     cliOutput?.appendChild(line);
 
-    scrollToBottom();
+    cliSectionTool.scrollToBottom();
     focusInput();
 }

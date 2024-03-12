@@ -18,7 +18,7 @@ const a200App = new WebSocketUrl("9000", "python/a200");
 const oxeylyzerApp = new WebSocketUrl("9001", "rust/oxeylyzer");
 const genkeyApp = new WebSocketUrl("9002", "go/genkey");
 
-const debug: boolean = false;
+const debug: boolean = true;
 const CMINI_URL: string = debug ? cminiApp.debug : cminiApp.release;
 const A200_URL: string = debug ? a200App.debug : a200App.release;
 const OXEYLYZER_URL: string = debug ? oxeylyzerApp.debug : oxeylyzerApp.release;
