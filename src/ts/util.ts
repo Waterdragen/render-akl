@@ -64,4 +64,79 @@ class BashCommandParser {
     }
 }
 
-export {BashCommandParser, ParseResult}
+class CliWebsocket {
+    ws: WebSocket | null;
+    url: string;
+    onResponse: (event: MessageEvent<any>) => void
+    retryWrapper: HTMLElement | null
+    cliSectionBlurWrapper: HTMLElement | null
+
+    public constructor(url: string, 
+                       onResponse: (event: MessageEvent<any>) => void, 
+                       retryWrapper: HTMLElement | null, 
+                       cliSectionBlurWrapper: HTMLElement | null,
+                       retryButton: HTMLButtonElement | null) {
+        this.ws = null;
+        this.url = url;
+        this.onResponse = onResponse;
+        this.retryWrapper = retryWrapper;
+        this.cliSectionBlurWrapper = cliSectionBlurWrapper;
+        retryButton!.onclick = this.connectToWs.bind(this);
+        this.connectToWs();
+    }
+
+    public connectToWs() {
+        this.ws = new WebSocket(this.url);
+        this.ws.onmessage = this.onResponse;
+        this.ws.onopen = this.onOpen.bind(this);
+        this.ws.onclose = this.onClose.bind(this);
+        this.onOpen();
+    }
+
+    public ready(): boolean {
+        return this.ws !== null && this.ws.readyState === WebSocket.OPEN;
+    }
+
+    public send(data: string) {
+        this.ws?.send(data);
+    }
+
+    onOpen() {
+        this.retryWrapper!.style.display = "none";  // on open ok
+        this.cliSectionBlurWrapper?.classList.remove("blur");
+    }
+
+    onClose() {
+        this.retryWrapper!.style.display = "flex";  // on close retryWrapper is null, error
+        this.cliSectionBlurWrapper?.classList.add("blur");
+    }
+}
+
+class CliSectionTool {
+    cliSection: Element | null
+    window: Window;
+
+    constructor(cliSection: Element | null, _window: Window) {
+        this.cliSection = cliSection;
+        this.window = _window;
+    }
+
+    public scrollToBottom() {
+        if (this.cliSection) {
+            this.cliSection.scrollTop = this.cliSection.scrollHeight;
+        }
+    }
+
+    public weakFocus(input: HTMLInputElement | null) {
+        if (this.window.getSelection()?.toString() !== "") {
+            return;
+        };
+        const currentScrollTop = this.cliSection?.scrollTop || document.body.scrollTop;
+        setTimeout(() => {
+            input?.focus();
+            this.cliSection!.scrollTop = currentScrollTop;
+        }, 0);
+    }
+}
+
+export {BashCommandParser, ParseResult, CliWebsocket, CliSectionTool}

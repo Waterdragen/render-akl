@@ -1,4 +1,5 @@
 .cli-section {
+    position: relative;
     padding: 10px;
     background-color: #2d0922;
     min-width: 960px;
@@ -33,6 +34,53 @@
 
 .cli-input:focus {
     outline: none;
+}
+
+.cli-section-blur-wrapper.blur {
+    filter: blur(5px);
+    transition: filter 0.8s ease;
+}
+
+.retry-wrapper {
+    z-index: 2;
+    position: sticky;
+    display: none;
+    top: 50%;
+    height: 0%;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.2s ease-in; 
+}
+
+.retry-text {
+    z-index: inherit;
+    position: absolute;
+    align-self: center;
+    text-align: center;
+    top: -40px;
+    font-family: "Ubuntu Mono", monospace;
+    font-size: large;
+}
+
+.retry-button {
+    z-index: inherit;
+    position: absolute;
+    align-self: center;
+    text-align: center;
+    top: 10px;
+    font-family: "Ubuntu Mono", monospace;
+    background-color: #3c3c3c;
+    font-size: large;
+    color: #ddd;
+    width: fit-content;
+    height: fit-content;
+    padding: 7px;
+    border: 1px solid #999;
+    border-radius: 3px;
+}
+
+@keyframes fadeIn {  
+    from { opacity:0; } to { opacity:1; }  
 }
 
 /* width */

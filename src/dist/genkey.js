@@ -1,16 +1,19 @@
 import { AnsiUp } from "../modules/ansi_up.js";
 import { GENKEY_URL } from "./consts.js";
-import { BashCommandParser } from "./util.js";
+import { BashCommandParser, CliSectionTool, CliWebsocket } from "./util.js";
 const ansiUp = new AnsiUp;
 const cliSection = document.querySelector(".cli-section");
 const cliInputWrapper = document.querySelector(".cli-input-wrapper");
 const cliInput = document.querySelector(".cli-input");
 const cliOutput = document.querySelector(".cli-output");
 const cliInteractiveInput = document.querySelector(".cli-interactive-input");
-let genkeyWs = new WebSocket(GENKEY_URL);
+const cliSectionTool = new CliSectionTool(cliSection, window);
+const cliSectionBlurWrapper = document.querySelector(".cli-section-blur-wrapper");
+const retryWrapper = document.querySelector(".retry-wrapper");
+const retryButton = document.querySelector(".retry-button");
+let genkeyWs = new CliWebsocket(GENKEY_URL, onResponse, retryWrapper, cliSectionBlurWrapper, retryButton);
 let inProgress = false;
 let inInteractive = false;
-genkeyWs.onmessage = onResponse;
 const LINUX_HEADER = `<span style="color: #8adf32">guest@linux-desktop</span>\
 <span>:</span>\
 <span style="color: #729fcf">/root/app/genkey&#8209;master/$&nbsp;</span>`;
@@ -24,7 +27,7 @@ cliSection?.addEventListener("dblclick", function (event) {
     inInteractive ? focusInteractiveInput() : focusInput();
 });
 cliSection?.addEventListener("click", function (event) {
-    inInteractive ? weakFocus(cliInteractiveInput) : weakFocus(cliInput);
+    inInteractive ? cliSectionTool.weakFocus(cliInteractiveInput) : cliSectionTool.weakFocus(cliInput);
 });
 cliInput?.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
@@ -87,11 +90,11 @@ function onResponse(event) {
         let lastOutput = cliOutput.lastElementChild;
         lastOutput.innerHTML += ansiUp.ansi_to_html(message);
     }
-    scrollToBottom();
+    cliSectionTool.scrollToBottom();
 }
 function sendCommand(command) {
     cliInputWrapper.style.display = "none";
-    if (genkeyWs.readyState === WebSocket.OPEN) {
+    if (genkeyWs.ready()) {
         inInteractive
             ? cliInteractiveInput?.setAttribute("contenteditable", "false")
             : cliInput?.setAttribute("contenteditable", "false");
@@ -101,25 +104,9 @@ function sendCommand(command) {
         inInteractive ? focusInteractiveInput() : focusInput();
     }
 }
-function scrollToBottom() {
-    if (cliSection) {
-        cliSection.scrollTop = cliSection.scrollHeight;
-    }
-}
 function focusInput() {
     setTimeout(() => {
         cliInput?.focus();
-    }, 0);
-}
-function weakFocus(input) {
-    if (window.getSelection()?.toString() !== "") {
-        return;
-    }
-    ;
-    const currentScrollTop = cliSection?.scrollTop || document.body.scrollTop;
-    setTimeout(() => {
-        input?.focus();
-        cliSection.scrollTop = currentScrollTop;
     }, 0);
 }
 function focusInteractiveInput() {
@@ -132,6 +119,6 @@ function appendOutput(output) {
     output = ansiUp.ansi_to_html(output);
     line.innerHTML = output;
     cliOutput?.appendChild(line);
-    scrollToBottom();
+    cliSectionTool.scrollToBottom();
     focusInput();
 }

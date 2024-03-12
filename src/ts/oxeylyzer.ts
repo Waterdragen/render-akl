@@ -1,16 +1,19 @@
 import { AnsiUp } from "../modules/ansi_up.js";
 import { OXEYLYZER_URL } from "./consts.js";
+import { CliSectionTool, CliWebsocket } from "./util.js";
 const ansiUp = new AnsiUp;
 
 const cliSection = document.querySelector(".cli-section");
 const cliInput: HTMLInputElement | null = document.querySelector(".cli-input");
 const cliOutput = document.querySelector(".cli-output");
 const cliInputWrapper: HTMLElement | null = document.querySelector(".cli-input-wrapper");
+const cliSectionTool = new CliSectionTool(cliSection, window);
 
-let oxeylyzerWs = new WebSocket(OXEYLYZER_URL);
+const cliSectionBlurWrapper: HTMLElement | null = document.querySelector(".cli-section-blur-wrapper");
+const retryWrapper: HTMLElement | null = document.querySelector(".retry-wrapper");
+const retryButton: HTMLButtonElement | null = document.querySelector(".retry-button");
+let oxeylyzerWs = new CliWebsocket(OXEYLYZER_URL, onResponse, retryWrapper, cliSectionBlurWrapper, retryButton);
 let inProgress = false;
-
-oxeylyzerWs.onmessage = onResponse;
 
 let LINUX_HEADER = `
 <span style="color: #8adf32">guest@linux&#8209;desktop</span>
@@ -38,7 +41,7 @@ cliSection?.addEventListener("dblclick", function(event: Event) {
 });
 
 cliSection?.addEventListener("click", function(event: Event) {
-    weakFocusInput();
+    cliSectionTool.weakFocus(cliInput);
 });
 
 // User pressed enter
@@ -66,7 +69,7 @@ function onResponse(event: MessageEvent) {
         cliInput?.setAttribute("contenteditable", "true");
         cliInputWrapper!.style.display = "table";
         focusInput();
-        scrollToBottom();
+        cliSectionTool.scrollToBottom();
         return;
     }
 
@@ -93,7 +96,7 @@ function onResponse(event: MessageEvent) {
             cliInput?.setAttribute("contenteditable", "true");
             cliInputWrapper!.style.display = "flex";
             focusInput();
-            scrollToBottom();
+            cliSectionTool.scrollToBottom();
         }))
         return;
     }
@@ -122,7 +125,7 @@ function onResponse(event: MessageEvent) {
 }
 
 function sendCommand(command: string) {
-    if (oxeylyzerWs.readyState === WebSocket.OPEN) {
+    if (oxeylyzerWs.ready()) {
         cliInput?.setAttribute("contenteditable", "false");
         cliInputWrapper!.style.display = "none";
         oxeylyzerWs.send(command);
@@ -130,26 +133,9 @@ function sendCommand(command: string) {
     focusInput();
 }
 
-function scrollToBottom() {
-    if (cliSection) {
-        cliSection.scrollTop = cliSection.scrollHeight;
-    }
-}
-
 function focusInput() {
     setTimeout(() => {
         cliInput?.focus();
-    }, 0);
-}
-
-function weakFocusInput() {
-    if (window.getSelection()?.toString() !== "") {
-        return;
-    };
-    const currentScrollTop = cliSection?.scrollTop || document.body.scrollTop;
-    setTimeout(() => {
-        cliInput?.focus();
-        cliSection!.scrollTop = currentScrollTop;
     }, 0);
 }
 
@@ -159,7 +145,7 @@ function appendOutput(output: string) {
     line.innerHTML = output;
     cliOutput?.appendChild(line);
     
-    scrollToBottom();
+    cliSectionTool.scrollToBottom();
     focusInput();
 }
 
