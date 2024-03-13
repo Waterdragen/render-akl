@@ -66,14 +66,23 @@
       <h1>demo</h1>
       <div id="cminiPromptWrapper">
         <div class="prompt-section">
-          <div id="cminiPromptWindow" readonly></div>
+          <div class="retry-wrapper">
+            <div class="retry-context-wrapper">
+              <div class="retry-text">Failed to connect to websocket</div>
+              <button class="retry-button">Retry</button>
+            </div>
+          </div>
+          <div class="cli-section-blur-wrapper">
+            <div id="cminiPromptWindow" readonly></div>
+          </div>
         </div>
 
         <div class="prompt-section">
-          <input type="text" 
-                 id="cminiCommandInput" 
-                 placeholder="Message @cmini">
-          <button id="cminiSendButton"></button>
+          <textarea type="text" 
+                    id="cminiCommandInput" 
+                    placeholder="Message #cmini"
+                    rows="1"
+                    ></textarea>
         </div>
 
       </div>
@@ -99,6 +108,12 @@
       <h2 class="remarks-title">Remarks</h2>
       <div class="remarks">
         <ul class="remarks-list">
+          <li>
+            Press <code>enter</code> to send a message
+          </li>
+          <li>
+            Use <code>shift+enter</code> to add a new line
+          </li>
           <li>
             Disabled commands: 
             <code>akl</code>, 

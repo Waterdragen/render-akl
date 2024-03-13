@@ -1,73 +1,104 @@
-const sendButton = document.getElementById("cminiSendButton");
 const commandInput: HTMLInputElement = document.getElementById("cminiCommandInput") as HTMLInputElement;
 const commandWindow = document.getElementById("cminiPromptWindow");
 
 import { CMINI_URL } from "./consts.js";
 import { getUserMessageHTML, getCminiMessageHTML } from "./cmini_message.js";
 
-var CMINI_SOCKET: WebSocket = new WebSocket(CMINI_URL);
-var cminiConnectionTimeout: NodeJS.Timeout = setCminiConnectionTimeout();
+const cliSectionBlurWrapper: HTMLElement | null = document.querySelector(".cli-section-blur-wrapper");
+const retryWrapper: HTMLElement | null = document.querySelector(".retry-wrapper");
+const retryButton: HTMLButtonElement | null = document.querySelector(".retry-button");
 
-function setCminiConnectionTimeout(): NodeJS.Timeout {
-    return setTimeout(onCminiConnectionTimeout, 10_000);
+let cminiWs: WebSocket = new WebSocket(CMINI_URL);
+connectToWs();
+
+retryButton!.onclick = connectToWs;
+
+let lastSentTime = 0;
+const COOLDOWN_MS = 1000;
+
+function connectToWs() {
+    cminiWs = new WebSocket(CMINI_URL);
+    cminiWs.onmessage = onResponse;
+    cminiWs.onopen = onOpen;
+    cminiWs.onclose = onClose;
+    onOpen();
 }
 
-function onCminiConnectionTimeout() {
-    if (!isCminiConnected()) {
-        // Connection timeout occurred
-        console.log('WebSocket connection timed out!');
-        CMINI_SOCKET.close(); // Close the connection
+function onResponse(event: MessageEvent<any>) {
+    const message: string = event.data;
+    appendResponse(message);
+}
+
+function onOpen() {
+    retryWrapper!.style.display = "none";
+    cliSectionBlurWrapper?.classList.remove("blur");
+}
+
+function onClose() {
+    retryWrapper!.style.display = "flex";
+    cliSectionBlurWrapper?.classList.add("blur");
+}
+
+function cminiConnected(): boolean {
+    return cminiWs.readyState === WebSocket.OPEN;
+}
+
+function sendCommand(command: string) {
+    if (cminiConnected()) {
+        cminiWs.send(command);
     }
 }
 
-function cminiReconnect() {
-    console.log("Reconnecting to cmini");
-    CMINI_SOCKET = new WebSocket(CMINI_URL);
-    cminiConnectionTimeout = setCminiConnectionTimeout();
-    setupCminiEventListeners();
+function appendCommand(command: string) {
+    commandWindow!.innerHTML += getUserMessageHTML(command);
+    scrollToBottom();
 }
 
-function isCminiConnected(): boolean {
-    return CMINI_SOCKET.readyState === WebSocket.OPEN;
+function appendResponse(message: string) {
+    commandWindow!.innerHTML += getCminiMessageHTML(message);
+    scrollToBottom();
 }
 
-function setupCminiEventListeners() {
-    // Event listener for when the connection is established
-    CMINI_SOCKET.onopen = (event) => {
-        console.log('cmini connection established!');
-        clearTimeout(cminiConnectionTimeout);
-    };
-    
-    
-    CMINI_SOCKET.onmessage = (event) => {
-        const message: string = event.data;
-        sendMessage(message);
-        console.log("Received message: " + message);
-    }
-}
-
-setupCminiEventListeners();
-  
-
-sendButton?.addEventListener("click", () => {
-    if (!isCminiConnected()) {
-        cminiReconnect();
+commandInput.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter") {
         return;
     }
-        
+    if (event.shiftKey) {
+        return;
+    }
+    event.preventDefault();
+    if (!newCooldownOrHold()) {
+        return;
+    }
     const command: string = commandInput.value;
-    // Send the user input to the websocket
-    CMINI_SOCKET.send(command);
+    console.log(command);
+    sendCommand(command);
+    appendCommand(command);
 
-    // Append the command to the window
-    if (commandWindow !== null) {
-        commandWindow.innerHTML += getUserMessageHTML(command);
-    }
-});
+    commandInput.value = "";
+    updateInputHeight();
+})
 
-function sendMessage(message: string) {
-    if (commandWindow !== null) {
-        commandWindow.innerHTML += getCminiMessageHTML(message);
+commandInput.addEventListener("input", updateInputHeight);
+
+function updateInputHeight() {
+    commandInput.style.height = "fit-content";
+    const scrollHeight = commandInput.scrollHeight.toString() + "px";
+    commandInput.style.height = scrollHeight;
+}
+
+function scrollToBottom() {
+    if (commandWindow) {
+        commandWindow.scrollTop = commandWindow.scrollHeight;
     }
+}
+
+function newCooldownOrHold(): boolean {
+    const currentTime = Date.now();
+    if (currentTime - lastSentTime < COOLDOWN_MS) {
+        return false;
+    }
+    lastSentTime = currentTime;
+    return true;
 }
 
