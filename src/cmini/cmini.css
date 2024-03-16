@@ -6,6 +6,10 @@
     font-display: swap;
 }
 
+.repo-card-wrapper {
+    min-height: 133px;
+}
+
 #cminiPromptWrapper {
     display: flex;
     flex-direction: column;

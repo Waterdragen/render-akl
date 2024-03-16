@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="cmini.css">
   <link rel="stylesheet" href="cmini_message.css">
   <script src="../dist/main.js" type="application/javascript"></script>
+  <script src="../modules/repo-card.js" type="module"></script>
   <script src="../dist/cmini.js" type="module"></script>
 </head>
 
@@ -55,11 +56,12 @@
   <main>
     
     <section>
-      <h1>cmini</h1>
-      <div>A layout analyzer in bot form</div>
-      <button class="github-button"
-              onclick="window.open('https://github.com/apsu/cmini')">
-              Github</button>
+      <div>
+        <h1>cmini</h1>
+      </div>
+      <div class="repo-card-wrapper">
+        <div class="repo-card" data-repo="Apsu/cmini" data-theme="mt-theme"></div>
+      </div>
     </section>
 
     <section>

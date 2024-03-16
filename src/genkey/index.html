@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../cli.css">
   <link rel="stylesheet" href="./genkey.css">
   <script src="../dist/main.js" type="application/javascript"></script>
+  <script src="../modules/repo-card.js" type="module"></script>
   <script src="../dist/genkey.js", type="module"></script>
 </head>
 
@@ -56,10 +57,9 @@
     <main>
       <section>
         <h1>genkey</h1>
-        <div>The layout analyzer and generator used to create Semimak</div>
-        <button class="github-button"
-                onclick="window.open('https://github.com/semilin/genkey')">
-                Github</button>
+        <div class="repo-card-wrapper">
+          <div class="repo-card" data-repo="semilin/genkey"></div>
+        </div>
       </section>
   
       <section>

@@ -1,0 +1,26 @@
+.repo-table {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: fit-content;
+    padding: 30px 0;
+}
+
+.repo-card {
+    display: inline-grid;
+    width: 200px;
+    height: 150px;
+}
+
+.link-table {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: fit-content;
+    padding: 30px 0;
+}
+
+.link-card {
+    display: inline-grid;
+    width: 200px;
+}

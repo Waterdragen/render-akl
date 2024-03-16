@@ -7,6 +7,7 @@
   <title>Keyboard Layout Wiki</title>
   <link rel="stylesheet" href="styles.css">
   <script src="./dist/main.js" type="application/javascript"></script>
+  <script src="./modules/repo-card.js" type="module"></script>
 </head>
 
 <body>
@@ -50,8 +51,26 @@
 
   <main>
     <section>
-      <h1>Home</h1>
+      <h2>A collection of alt layout analyzers</h2>
+    </section>
 
+    <section>
+      <h2>Repos</h2>
+      <div style="display: grid; 
+                  grid-template-columns: repeat(4, 1fr);
+                  gap: 30px;
+                  width: fit-content;
+                  padding: 30px 0;">
+        <div style="display: inline-grid; width: 200px;">
+          <span style="padding-bottom: 10px">Front end</span>
+          <div class="repo-card" data-repo="waterdragen/render-akl"></div>
+        </div>
+        <div style="display: inline-grid; width: 200px;">
+          <span style="padding-bottom: 10px">Back end</span>
+          <div class="repo-card" data-repo="waterdragen/akl-ws"></div>
+        </div>
+      </div>
+      </div>
     </section>
   </main>
   <div class="last-line"></div>
