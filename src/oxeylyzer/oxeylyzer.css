@@ -1,3 +1,7 @@
 .cli-input-wrapper {
     display: none;
 }
+
+.repo-card-wrapper {
+    min-height: 89px;
+}

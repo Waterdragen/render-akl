@@ -54,9 +54,6 @@ main {
     padding: 20px;
 }
 
-button {
-}
-
 .header-button {
     padding: 10px 15px;
     border-radius: 5px;
@@ -72,6 +69,12 @@ button {
 
 .header-button.active {
     color: #e2b714;
+}
+
+.repo-card-wrapper {
+    display: flex;
+    min-height: 115px;
+    padding-top: 10px;
 }
 
 .remarks {
