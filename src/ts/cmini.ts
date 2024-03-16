@@ -71,7 +71,6 @@ commandInput.addEventListener("keydown", (event) => {
         return;
     }
     const command: string = commandInput.value;
-    console.log(command);
     sendCommand(command);
     appendCommand(command);
 

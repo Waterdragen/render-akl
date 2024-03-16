@@ -53,7 +53,6 @@ window.tarptaeya.reloadRepoCards = async function() {
     if (!data.description) {
       data = getDefaultRepoData(name);
     }
-    console.log(data);
 
     data.description = (data.description || '').replace(/:\w+:/g, function(match) {
       const name = match.substring(1, match.length - 1);

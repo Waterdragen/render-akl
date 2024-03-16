@@ -77,7 +77,6 @@ cliInteractiveInput?.addEventListener("keydown", function(event: Event) {
 // Genkey sends message to client
 function onResponse(event: MessageEvent) {
     const message: string = event.data;
-    console.log(message);
     if (message === "[DONE]") {
         cliInputWrapper!.style.display = "table";
         cliInput?.setAttribute("contenteditable", "true");
