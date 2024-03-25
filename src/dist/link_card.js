@@ -29,6 +29,8 @@ const ICON = {
 const LINKS = {
     "playground": new LinkData("Layout Playground", "An interactive web-based analyzer", "https://o-x-e-y.github.io/layouts/playground"),
     "keysolve": new LinkData("KeySolve", "Another web-based analyzer", "https://clemenpine.github.io/keysolve-web/"),
+    "cyanophage": new LinkData("cyanophage", "The layout playground and analyzer", "https://cyanophage.github.io/index.html"),
+    "klb": new LinkData("Keyboard Layout Battles", "Analyzer which compares two layouts", "https://keyboard-layout-battles.fly.dev/"),
     "layouts doc": new LinkData("Keyboard Layouts Doc", "Many known layouts compiled in one place, sorted by SFB rate", "https://bit.ly/keyboard-layouts-doc"),
     "big bag": new LinkData("Dreymar's Big Bag", "A collection of modifications and other useful tricks", "https://dreymar.colemak.org/"),
     "words filter": new LinkData("gfruit's Words Filter", "A simple yet incredibly useful tool for finding words with certain bigrams, characters, and fingers", "https://gfruit.github.io/typing/words-filter.html"),
@@ -58,7 +60,7 @@ function reloadLinkCards() {
           <div style="display: flex; align-items: center;">
             <svg style="fill: ${THEME.color}; margin-right: 8px;" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">${linkIcon}</svg>
             <span style="font-weight: 600; color: ${THEME.linkColor};">
-              <a style="text-decoration: none; color: inherit;" href="${data.url}">${data.fullName}</a>
+              <a style="text-decoration: none; color: inherit;" href="${data.url}" target="_blank">${data.fullName}</a>
             </span>
           </div>
           <div style="font-size: 12px; margin-bottom: 16px; margin-top: 8px; color: ${THEME.color};">${data.description}</div>

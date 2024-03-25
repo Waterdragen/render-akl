@@ -48,8 +48,7 @@ window.tarptaeya.reloadRepoCards = async function() {
   for (const el of document.querySelectorAll('.repo-card')) {
     const name = el.getAttribute('data-repo');
     const theme = THEMES[el.getAttribute('data-theme') || 'mt-theme'];
-    // let data = await get(`https://api.github.com/repos/${name}`);
-    let data = {};
+    let data = await get(`https://api.github.com/repos/${name}`);
     if (!data.description) {
       data = getDefaultRepoData(name);
     }
